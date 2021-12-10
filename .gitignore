@@ -1,0 +1,9 @@
+*.o
+st
+st-msg
+config.h
+#patch/
+.ccls-cache/
+*.orig
+*.rej
+st.1
