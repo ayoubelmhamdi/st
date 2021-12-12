@@ -1,0 +1,82 @@
+From b7952b5ee9ebf33b64f1650a61056838d24a67c1 Mon Sep 17 00:00:00 2001
+From: Ayoub EL Mhamdi <ayoub.elmhamdi@gmail.com>
+Date: Sun, 12 Dec 2021 20:40:50 +0100
+Subject: [PATCH 5/5] patch : openclipbroid
+
+---
+ config.def.h |  4 +++-
+ st.c         |  2 +-
+ st.h         |  1 +
+ x.c          | 19 +++++++++++++++++++
+ 4 files changed, 24 insertions(+), 2 deletions(-)
+
+diff --git a/config.def.h b/config.def.h
+index 12fcc0a..cc5729c 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -199,7 +199,9 @@ static Shortcut shortcuts[] = {
+ 	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
+ 	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
+   // add by me
+-	{ MODKEY,               XK_l,    copyurl,        {.i =  0} },
++	{ MODKEY,               XK_l,           copyurl,        {.i =  0} },
++	{ MODKEY,               XK_o,           opencopied,     {.v = "xdg-open"} },
++
+ };
+ 
+ /*
+diff --git a/st.c b/st.c
+index 320bee9..eb3e391 100644
+--- a/st.c
++++ b/st.c
+@@ -822,7 +822,7 @@ ttynew(const char *line, char *cmd, const char *out, char **args)
+ 		break;
+ 	default:
+ #ifdef __OpenBSD__
+-		if (pledge("stdio rpath tty proc", NULL) == -1)
++		if (pledge("stdio rpath tty proc exec", NULL) == -1)
+ 			die("pledge\n");
+ #endif
+ 		close(s);
+diff --git a/st.h b/st.h
+index 5d8913b..bcb1ea1 100644
+--- a/st.h
++++ b/st.h
+@@ -88,6 +88,7 @@ void draw(void);
+ 
+ void kscrolldown(const Arg *);
+ void kscrollup(const Arg *);
++void opencopied(const Arg *);
+ void printscreen(const Arg *);
+ void printsel(const Arg *);
+ void sendbreak(const Arg *);
+diff --git a/x.c b/x.c
+index 620afb1..687e2b0 100644
+--- a/x.c
++++ b/x.c
+@@ -2479,3 +2479,22 @@ run:
+ 
+ 	return 0;
+ }
++
++void
++opencopied(const Arg *arg)
++{
++	size_t const max_cmd = 2048;
++	char * const clip = xsel.clipboard;
++	if(!clip) {
++		fprintf(stderr, "Warning: nothing copied to clipboard\n");
++		return;
++	}
++
++	/* account for space/quote (3) and \0 (1) and & (1) */
++	/* e.g.: xdg-open "https://st.suckless.org"& */
++	size_t const cmd_size = max_cmd + strlen(clip) + 5;
++	char cmd[cmd_size];
++
++	snprintf(cmd, cmd_size, "%s \"%s\"&", (char *)arg->v, clip);
++	system(cmd);
++}
+-- 
+2.34.1
+
