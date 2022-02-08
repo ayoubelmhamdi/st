@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "FiraCode Nerd Font:pixelsize=18";
+static char *font = "JetBrainsMono Nerd Font Mono:pixelsize=18";
 static int borderpx = 2;
 
 /*
@@ -13,7 +13,7 @@ static int borderpx = 2;
  * expects farbfeld format
  * pseudo transparency fixes coordinates to the screen origin
  */
-static const char *bgfile = "/mega/cloud/blur/ayoub.ff";
+static const char *bgfile = "/mega/cloud/blur/bg.ff";
 static const int pseudotransparency = 0;
 
 /*

@@ -6,4 +6,3 @@ config.h
 .ccls-cache/
 *.orig
 *.rej
-st.1
