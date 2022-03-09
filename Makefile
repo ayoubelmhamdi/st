@@ -30,8 +30,19 @@ $(OBJ): config.h config.mk
 st: $(OBJ)
 	$(CC) -o $@ $(OBJ) $(STLDFLAGS)
 
+nvimst: sednvim $(OBJ) 
+	$(CC) -o $@ $(OBJ) $(STLDFLAGS)
+	@cp -f nvimst $(DESTDIR)$(PREFIX)/bin/nvimst
+	@sed -E -i 's#^(static const char .bgfile = .).*(")#\1/mega/cloud/blur/bg.ff\2#' config.def.h
+
+sednvim:
+	@sed -E -i 's#^(static const char .bgfile = .).*(")#\1/mega/cloud/blur/10.ff\2#' config.def.h
+
+
 clean:
-	rm -f st $(OBJ) st-$(VERSION).tar.gz
+	@-rm -f st nvimst $(OBJ) st-$(VERSION).tar.gz
+	@-rm -f *.rej
+	@-rm -f *.orig
 
 dist: clean
 	mkdir -p st-$(VERSION)
@@ -50,6 +61,7 @@ install: st
 	chmod 644 $(DESTDIR)$(MANPREFIX)/man1/st.1
 	tic -sx st.info
 	@echo Please see the README file regarding the terminfo entry of st.
+
 
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/st
