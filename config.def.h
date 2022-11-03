@@ -6,6 +6,7 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font = "FiraCode Nerd Font:pixelsize=18";
+// static char *font = "FiraAyoub:pixelsize=18";
 static int borderpx = 2;
 
 /*
@@ -96,8 +97,9 @@ unsigned int tabspaces = 2;
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 
+    //#21262D
   /* 8 normal colors */
-  [0] = "#282828", /* hard contrast: #1d2021 / soft contrast: #32302f */
+  [0] = "#21262D", /*#282828", /* hard contrast: #1d2021 / soft contrast: #32302f */
   [1] = "#cc241d", /* red     */
   [2] = "#98971a", /* green   */
   [3] = "#d79921", /* yellow  */
