@@ -1,0 +1,8 @@
+dwm
+*.orig
+*.rej
+*.o
+config.h
+st
+st-*.diff
+patches/
