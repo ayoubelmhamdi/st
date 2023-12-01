@@ -5,14 +5,14 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+static char *font = "FiraCode Nerd Font:18";
 /* Spare fonts */
 static char *font2[] = {
 /*	"Inconsolata for Powerline:pixelsize=12:antialias=true:autohint=true", */
 /*	"Hack Nerd Font Mono:pixelsize=11:antialias=true:autohint=true", */
 };
 
-static int borderpx = 2;
+static int borderpx = 4;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -102,26 +102,25 @@ unsigned int tabspaces = 8;
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
-	[0] = "#282828", /* hard contrast: #1d2021 / soft contrast: #32302f */
-	[1] = "#cc241d", /* red     */
-	[2] = "#98971a", /* green   */
-	[3] = "#d79921", /* yellow  */
+	[0] = "#181818", /* hard contrast: #1d2021 / soft contrast: #32302f */
+	[1] = "#f43841", /* red     */
+	[2] = "#73c936", /* green   */
+	[3] = "#ffdd33", /* yellow  */
 	[4] = "#458588", /* blue    */
 	[5] = "#b16286", /* magenta */
-	[6] = "#689d6a", /* cyan    */
+	[6] = "#9e95c7", /* cyan    */
 	[7] = "#a89984", /* white   */
 
 	/* 8 bright colors */
-	[8]  = "#928374", /* black   */
-	[9]  = "#fb4934", /* red     */
-	[10] = "#b8bb26", /* green   */
+	[8]  = "#e4e4ef", /* black   */
+	[9]  = "#ff4f58", /* red     */
+	[10] = "#b8bb26", /* green   */ //sss
 	[11] = "#fabd2f", /* yellow  */
 	[12] = "#83a598", /* blue    */
 	[13] = "#d3869b", /* magenta */
 	[14] = "#8ec07c", /* cyan    */
 	[15] = "#ebdbb2", /* white   */
 };
-
 
 /*
  * Default colors (colorname index)
@@ -205,10 +204,11 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
-	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
-	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
+	{ TERMMOD,              XK_U,           kscrollup,      {.i = -1} },
+	{ TERMMOD,              XK_D,           kscrolldown,    {.i = -1} },
+	{ TERMMOD,              XK_K,           kscrollup,      {.i =  1} },
+	{ TERMMOD,              XK_J,           kscrolldown,    {.i =  1} },
 };
 
 /*
